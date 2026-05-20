@@ -7,12 +7,65 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <h1>VibeCoder: The Game</h1>
-    <p id="challenge">Welcome to the chaos of vibe coding. Click below to start a challenge.</p>
-    <button id="startBtn">Start Challenge</button>
-    <div id="result"></div>
-  </div>
+  <main id="app" class="game-shell">
+    <section class="hero" aria-labelledby="gameTitle">
+      <p class="eyebrow">A technical leadership simulator, unfortunately</p>
+      <h1 id="gameTitle">VibeCoder: The Game</h1>
+      <p class="lede">
+        You get 10 questions to prove you have what it takes to be a good vibe
+        coder: confidence, timing, and the ability to make a questionable choice
+        sound intentional.
+      </p>
+    </section>
+
+    <section class="scoreboard" aria-label="Run statistics">
+      <div>
+        <span class="stat-label">Questions</span>
+        <strong id="round">0/10</strong>
+      </div>
+      <div>
+        <span class="stat-label">Judgment</span>
+        <strong id="score">0</strong>
+      </div>
+      <div>
+        <span class="stat-label">Incidents</span>
+        <strong id="incidents">0</strong>
+      </div>
+    </section>
+
+    <section class="challenge-card" aria-live="polite">
+      <div class="terminal-bar" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <p class="section-label">Current Ticket</p>
+      <h2 id="challengeTitle">Loading your first questionable decision.</h2>
+      <p id="challengeBrief">
+        This is about to happen. Choose the path that feels most defensible in a meeting with no agenda.
+      </p>
+
+      <div id="choices" class="choices" aria-label="Vibe choices"></div>
+
+      <div id="result" class="result">
+        <p>Choose a path. History will pretend this was a process.</p>
+        <span>Question 1 of 10</span>
+      </div>
+
+      <div class="recovery-plan">
+        <span>Vibe assessment</span>
+        <p id="recovery">Let us see if you have what it takes to be a good vibe coder.</p>
+      </div>
+    </section>
+
+    <section class="action-row" aria-label="Game controls">
+      <button id="nextBtn" type="button">Skip Question</button>
+      <p>
+        Current rank:
+        <strong id="rank">Vibe Coder In Good Standing</strong>
+      </p>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>

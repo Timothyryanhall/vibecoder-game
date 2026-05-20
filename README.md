@@ -1,27 +1,27 @@
 # VibeCoder: The Game
 
-Welcome to **VibeCoder: The Game**, a humorous simulation of the chaos involved in "vibe coding." This game pokes fun at creating code without a plan, architecture, or tools and demonstrates why understanding tools and architectures matters.
+**VibeCoder: The Game** is a tiny browser game about software decisions made with too much confidence and not enough architecture.
 
-## How to Play
-- Click the "Start Challenge" button to begin a coding challenge.
-- See how your "just vibes" approach performs.
-- Get snarky feedback on your coding vibes.
-
-## Features
-- Random ridiculous coding challenges.
-- Snarky feedback about your vibe coding choices.
-- Hilarious insights into why tools and architectures matter.
+You get 10 questionable engineering scenarios and three defensible-sounding paths for each one. Pick your vibe, get judged, and see whether you have what it takes to be a good vibe coder.
 
 ## Why This Exists
-This project is a satire—let this game be a reminder that great tools, sound practices, and proper planning make for better code. And yes, this whole thing was built with *Copilot vibes*.
 
-## Try It Out
-Head to **GitHub Pages** to play: [VibeCoder: The Game](https://your-pages-link.example). Replace this with the actual link once deployed.
+This is satire for people who have shipped code, reviewed code, trusted an assistant too much, and then had to explain the phrase "demo-only path" in a meeting.
 
-## Built With
-- **HTML**
-- **CSS**
-- **JavaScript**
+It still likes fast tools. It just believes the human should stay awake.
 
-## Shoutout to Copilot
-This project was built with significant help from GitHub Copilot and showcases how Copilot can be an incredible tool when paired with a thoughtful (and playful) developer.
+## Run It
+
+Open `index.html` in a browser, or serve the directory locally:
+
+```bash
+python3 -m http.server 8001
+```
+
+Then visit `http://localhost:8001/`.
+
+## Test
+
+```bash
+node script.test.js
+```
