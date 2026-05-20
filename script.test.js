@@ -1,7 +1,7 @@
 const assert = require('node:assert/strict');
 const {
-  AUTO_ADVANCE_DELAY_MS,
   TOTAL_QUESTIONS,
+  applyChoiceOnce,
   chooseOption,
   createGameState,
   getFinalAssessment,
@@ -29,5 +29,12 @@ recordRound(state, { points: 2 });
 recordRound(state, { points: -1 });
 
 assert.deepEqual(state, { round: 2, score: 1, incidents: 1, usedChallengeIndexes: [] });
+
+const lockedState = createGameState();
+const firstApply = applyChoiceOnce(lockedState, { points: 2 }, false);
+const secondApply = applyChoiceOnce(lockedState, { points: -1 }, true);
+assert.equal(firstApply, true);
+assert.equal(secondApply, false);
+assert.deepEqual(lockedState, { round: 1, score: 2, incidents: 0, usedChallengeIndexes: [] });
+
 assert.ok(getFinalAssessment({ score: 8 }).includes('good vibe coder'));
-assert.equal(AUTO_ADVANCE_DELAY_MS, 6500);

@@ -1,5 +1,4 @@
 const TOTAL_QUESTIONS = 10;
-const AUTO_ADVANCE_DELAY_MS = 6500;
 
 const vibeChecks = [
   {
@@ -309,6 +308,15 @@ function recordRound(state, choice) {
   return state;
 }
 
+function applyChoiceOnce(state, choice, isChoiceLocked) {
+  if (isChoiceLocked) {
+    return false;
+  }
+
+  recordRound(state, choice);
+  return true;
+}
+
 function getRank(state) {
   if (state.score >= 12) return 'Certified Good Vibe Coder';
   if (state.score >= 7) return 'Surprisingly Employable Vibe Coder';
@@ -404,19 +412,10 @@ function initGame(documentRef = document) {
 
   let state = createGameState();
   let currentChallenge = null;
-  let advanceTimer = null;
+  let isChoiceLocked = false;
   let isFinal = false;
 
-  const clearAdvanceTimer = () => {
-    if (advanceTimer) {
-      window.clearTimeout(advanceTimer);
-      advanceTimer = null;
-    }
-  };
-
   const startRound = () => {
-    clearAdvanceTimer();
-
     if (state.round >= TOTAL_QUESTIONS) {
       isFinal = true;
       renderFinal(state, elements);
@@ -424,14 +423,15 @@ function initGame(documentRef = document) {
     }
 
     isFinal = false;
+    isChoiceLocked = false;
     currentChallenge = getNextChallenge(state);
     renderScenario(currentChallenge, state, elements);
   };
 
   const restartGame = () => {
-    clearAdvanceTimer();
     state = createGameState();
     currentChallenge = null;
+    isChoiceLocked = false;
     isFinal = false;
     renderProgress(state, elements);
     startRound();
@@ -448,12 +448,14 @@ function initGame(documentRef = document) {
 
   elements.choices.addEventListener('click', (event) => {
     const choiceButton = event.target.closest('.choice-button');
-    if (!choiceButton || !currentChallenge || choiceButton.disabled) return;
+    if (!choiceButton || !currentChallenge) return;
 
     const choice = chooseOption(currentChallenge, Number(choiceButton.dataset.optionIndex));
-    recordRound(state, choice);
+    const wasApplied = applyChoiceOnce(state, choice, isChoiceLocked);
+    if (!wasApplied) return;
+
+    isChoiceLocked = true;
     renderOutcome(choice, state, elements);
-    advanceTimer = window.setTimeout(startRound, AUTO_ADVANCE_DELAY_MS);
   });
 
   renderProgress(state, elements);
@@ -466,8 +468,8 @@ if (typeof document !== 'undefined') {
 
 if (typeof module !== 'undefined') {
   module.exports = {
-    AUTO_ADVANCE_DELAY_MS,
     TOTAL_QUESTIONS,
+    applyChoiceOnce,
     chooseOption,
     createGameState,
     getChallengeByRoll,

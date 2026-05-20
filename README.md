@@ -4,11 +4,7 @@
 
 You get 10 questionable engineering scenarios and three defensible-sounding paths for each one. Pick your vibe, get judged, and see whether you have what it takes to be a good vibe coder.
 
-## Why This Exists
-
-This is satire for people who have shipped code, reviewed code, trusted an assistant too much, and then had to explain the phrase "demo-only path" in a meeting.
-
-It still likes fast tools. It just believes the human should stay awake.
+Play it here: https://timothyryanhall.github.io/vibecoder-game/
 
 ## Run It
 
